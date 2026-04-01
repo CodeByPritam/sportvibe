@@ -350,18 +350,14 @@ async function seed() {
         console.log(`Created ${notifications.length} notifications...`);
 
         // ── Final summary ─────────────────────────────────────
-        console.log('\n✅ Seed complete!\n');
-        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        console.log('🔑 Test credentials (same for all users)');
-        console.log('Password: Password123!');
-        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        console.log('📧 Emails:');
-        users.forEach(u => console.log(`${u.email}`));
-        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        console.log('🎬 R2 video files to upload under videos/seed/:');
+        console.log('\nSeed complete!\n');
+        console.log('Test credentials (same for all users)\n');
+        console.log('Emails:\n');
+        console.log('Password: Password123!\n');
+        users.forEach(u => console.log(`${u.email}\n`));
+        console.log('R2 video files to upload under videos/seed/:\n');
         const keys = [...new Set(createdReels.map(r => r.videoKey))].sort();
-        keys.forEach(k => console.log(`${k}`));
-        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+        keys.forEach(k => console.log(`${k}\n`));
 
         // exit successfully
         process.exit(0);
