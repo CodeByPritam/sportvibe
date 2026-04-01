@@ -14,7 +14,7 @@ import notificationRoutes from './routes/notifications.js';
 import searchRoutes from './routes/search.js';
 import sportRoutes from './routes/sports.js';
 
-// Create instance
+// Create instance & load env
 dotenv.config();
 const app  = express();
 const PORT = process.env.PORT || 5000;
@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 5000;
 // Connect DB
 connectDB();
 
-// Middleware & Rate Limiting
+// Middleware injection & Rate Limiting
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 app.use(cors({
     origin: (origin, cb) => {
@@ -44,7 +44,13 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 app.use('/api', limiter);
 app.use('/api/auth/login',    authLimiter);
 app.use('/api/auth/register', authLimiter);
-app.get('/health', (req, res) => res.json({ status: 'ok', env: process.env.NODE_ENV, timestamp: new Date().toISOString() }));
+app.get('/health', (req, res) => {
+    return res.json({ 
+        status: 'ok', 
+        env: process.env.NODE_ENV, 
+        timestamp: new Date().toISOString() 
+    })
+});
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/reels', reelRoutes);
@@ -52,9 +58,14 @@ app.use('/api/upload', uploadRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/search', searchRoutes);
 app.use('/api/sports', sportRoutes);
-app.use((req, res) => res.status(404).json({ success: false, message: `Route ${req.method} ${req.path} not found` }));
+app.use((req, res) => {
+    return res.status(404).json({ 
+        success: false, 
+        message: `Route ${req.method} ${req.path} not found` 
+    });
+});
 app.use(errorHandler);
 
 // Start server
-app.listen(PORT, () => console.log(`🚀 SportVibe API running on port ${PORT} [${process.env.NODE_ENV}]`));
+app.listen(PORT, () => console.log(`🚀 SportVibe API running on port http://localhost:${PORT} [${process.env.NODE_ENV}]`));
 export default app;

@@ -7,6 +7,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 // Make Router instance
 const router = express.Router();
+
+// Multer setup
 const upload = multer({
     storage: multer.memoryStorage(),
     limits: { fileSize: 500 * 1024 * 1024 },
@@ -16,30 +18,70 @@ const upload = multer({
     },
 });
 
-// @route POST /api/upload/video
+// POST: /api/upload/video
 router.post('/video', protect, upload.single('video'), async (req, res, next) => {
     try {
-        if (!req.file) return res.status(400).json({ success: false, message: 'No video file provided' });
+
+        // Validate file
+        if (!req.file) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'No video file provided' 
+            });
+        }
+
+        // Generate unique key and upload to R2
         const ext = req.file.originalname.split('.').pop().toLowerCase() || 'mp4';
         const key = `videos/${req.user._id}/${uuidv4()}.${ext}`;
+
+        // Upload to R2
         await r2Client.send(new PutObjectCommand({ Bucket: R2_BUCKET, Key: key, Body: req.file.buffer, ContentType: req.file.mimetype }));
-        res.json({ success: true, data: { videoUrl: `${R2_PUBLIC_URL}/${key}`, videoKey: key, originalName: req.file.originalname, size: req.file.size } });
-    } catch (err) { 
-        next(err); 
-    }
+
+        // Response
+        res.json({ 
+            success: true, 
+            data: { 
+                videoUrl: `${R2_PUBLIC_URL}/${key}`, 
+                videoKey: key, 
+                originalName: req.file.originalname, 
+                size: req.file.size 
+            } 
+        });
+
+    } catch (err) { next(err); }
 });
 
-// @route DELETE /api/upload/video
+// DELETE: /api/upload/video
 router.delete('/', protect, async (req, res, next) => {
     try {
         const { videoKey } = req.body;
-        if (!videoKey) return res.status(400).json({ success: false, message: 'videoKey required' });
-        if (!videoKey.includes(req.user._id.toString())) return res.status(403).json({ success: false, message: 'Not authorized' });
+
+        // Validate videoKey
+        if (!videoKey) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'videoKey required' 
+            });
+        }
+
+        // Ensure user owns the video
+        if (!videoKey.includes(req.user._id.toString())) {
+            return res.status(403).json({ 
+                success: false, 
+                message: 'Not authorized' 
+            });
+        }
+
+        // Delete from R2
         await r2Client.send(new DeleteObjectCommand({ Bucket: R2_BUCKET, Key: videoKey }));
-        res.json({ success: true, message: 'File deleted' });
-    } catch (err) { 
-        next(err); 
-    }
+
+        // Response
+        res.json({ 
+            success: true, 
+            message: 'File deleted' 
+        });
+
+    } catch (err) { next(err); }
 });
 
 // Export
