@@ -13,7 +13,7 @@ const upload = multer({
     storage: multer.memoryStorage(),
     limits: { fileSize: 500 * 1024 * 1024 },
     fileFilter: (req, file, cb) => {
-        if (!file.mimetype.startsWith('video/')) return cb(new Error('Only video files allowed'), false);
+        if (!file.mimetype.startsWith('video/')) { return cb(new Error('Only video files allowed'), false); }
         cb(null, true);
     },
 });
@@ -29,13 +29,18 @@ router.post('/video', protect, upload.single('video'), async (req, res, next) =>
                 message: 'No video file provided' 
             });
         }
-
+        
         // Generate unique key and upload to R2
-        const ext = req.file.originalname.split('.').pop().toLowerCase() || 'mp4';
+        const ext = (req.file.originalname.split('.').pop() || 'mp4').toLowerCase();
         const key = `videos/${req.user._id}/${uuidv4()}.${ext}`;
 
         // Upload to R2
-        await r2Client.send(new PutObjectCommand({ Bucket: R2_BUCKET, Key: key, Body: req.file.buffer, ContentType: req.file.mimetype }));
+        await r2Client.send(new PutObjectCommand({ 
+            Bucket: R2_BUCKET, 
+            Key: key, 
+            Body: req.file.buffer, 
+            ContentType: req.file.mimetype 
+        }));
 
         // Response
         res.json({ 
