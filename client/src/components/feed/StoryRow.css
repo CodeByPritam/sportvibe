@@ -1,0 +1,49 @@
+.story-row { 
+    display: flex; 
+    gap: 14px; 
+    overflow-x: auto; 
+    padding-bottom: 4px; 
+    scrollbar-width: none; 
+}
+
+.story-row::-webkit-scrollbar { display: none; }
+.story-card { 
+    flex-shrink: 0; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 6px; 
+    cursor: pointer; 
+    transition: var(--transition); 
+}
+
+.story-card:hover { transform: translateY(-2px); }
+.story-ring { 
+    width: 64px; 
+    height: 64px; 
+    border-radius: 50%; 
+    background: linear-gradient(135deg, var(--accent), var(--accent3)); 
+    padding: 2.5px; 
+}
+
+.story-inner { 
+    width: 100%; 
+    height: 100%; 
+    border-radius: 50%; 
+    background: var(--surface); 
+    border: 2px solid var(--surface); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 22px; 
+    font-weight: 700; 
+    color: var(--accent); 
+}
+
+.story-name { 
+    font-size: 10px; 
+    font-weight: 600; 
+    color: var(--text2); 
+    text-align: center; 
+    max-width: 64px; 
+}
