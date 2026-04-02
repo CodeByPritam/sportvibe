@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Home, PlayCircle, PlusSquare, Bell, Settings, LogOut } from 'lucide-react';
+import { Home, PlayCircle, PlusSquare, Bell, Settings, LogOut, User } from 'lucide-react';
 import useAuthStore from '../../store/authStore';
-import { logout }   from '../../api/auth.api';
+import { logout } from '../../api/auth.api';
 import './Sidebar.css';
 
 // Sports categories
@@ -28,6 +28,7 @@ export default function Sidebar() {
         navigate('/auth');
     }
 
+    // Render
     return (
         <aside className="sidebar">
             <div className="sidebar-logo">
@@ -50,8 +51,9 @@ export default function Sidebar() {
                 ))}
 
                 <p className="nav-label">You</p>
+                <NavLink to="/profile" className={({isActive}) => `nav-item ${isActive ? 'active':''}`}><User size={16}/> Profile</NavLink>
                 <NavLink to="/notifications" className={({isActive}) => `nav-item ${isActive ? 'active' : ''}`}><Bell size={16}/> Notifications</NavLink>
-                <NavLink to="/settings"      className={({isActive}) => `nav-item ${isActive ? 'active' : ''}`}><Settings size={16}/> Settings</NavLink>
+                <NavLink to="/settings" className={({isActive}) => `nav-item ${isActive ? 'active' : ''}`}><Settings size={16}/> Settings</NavLink>
             </nav>
 
             <div className="sidebar-bottom">

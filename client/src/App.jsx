@@ -9,6 +9,7 @@ import NotificationsPage from './pages/NotificationsPage';
 import SettingsPage from './pages/SettingsPage';
 import SearchPage from './pages/SearchPage';
 import SportPage from './pages/SportPage';
+import ProfilePage from './pages/ProfilePage'
 
 // A wrapper for protected routes that checks for authentication
 function ProtectedRoute({ children }) {
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="home" element={<HomePage />} />
           <Route path="reels" element={<ReelsPage />} />
           <Route path="create" element={<CreatePage />} />
+          <Route path="profile" element={<ProfilePage />} />
           <Route path="notifications" element={<NotificationsPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="search" element={<SearchPage />} />
