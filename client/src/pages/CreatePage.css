@@ -1,0 +1,226 @@
+.create-page { 
+    padding: 32px 24px; 
+    max-width: 680px; 
+    margin: 0 auto; 
+}
+
+.create-page h2 { 
+    font-size: 22px; 
+    font-weight: 800; 
+    letter-spacing: -.5px; 
+}
+
+.create-subtitle { 
+    font-size: 13px; 
+    color: var(--text2); 
+    margin: 4px 0 28px; 
+}
+
+.upload-zone { 
+    border: 2px dashed var(--border2); 
+    border-radius: 16px; 
+    padding: 48px 24px; 
+    text-align: center; 
+    background: var(--surface); 
+    cursor: pointer; 
+    transition: var(--transition); 
+}
+
+.upload-zone:hover { 
+    border-color: var(--accent); 
+    background: rgba(232,68,26,.03); 
+}
+
+.upload-icon { 
+    font-size: 48px; 
+    margin-bottom: 14px; 
+}
+
+.upload-zone h3 { 
+    font-size: 16px; 
+    font-weight: 700; 
+    margin-bottom: 6px; 
+}
+
+.upload-zone p { 
+    font-size: 12px; 
+    color: var(--text3); 
+}
+
+.upload-browse-btn { 
+    display: inline-block; 
+    margin-top: 18px; 
+    padding: 10px 24px; 
+    background: var(--accent); 
+    color: #fff; 
+    border-radius: 99px; 
+    font-size: 13px; 
+    font-weight: 700; 
+}
+
+.create-form { 
+    display: flex; 
+    flex-direction: 
+    column; gap: 16px; 
+}
+
+.upload-preview { 
+    display: flex; 
+    align-items: center; 
+    gap: 14px; 
+    background: var(--surface); 
+    border: 1px solid var(--border); 
+    border-radius: var(--radius); 
+    padding: 14px 16px; 
+}
+
+.preview-name { 
+    font-size: 13px; 
+    font-weight: 700; 
+}
+
+.preview-size { 
+    font-size: 11px; 
+    color: var(--text3); 
+    margin-top: 2px; 
+}
+
+.change-btn { 
+    margin-left: auto; 
+    padding: 6px 14px; 
+    border: 1.5px solid var(--border); 
+    border-radius: 99px; 
+    font-size: 11px; 
+    font-weight: 600; 
+    color: var(--text2); 
+    cursor: pointer; 
+    font-family: var(--font); 
+    background: transparent; 
+    transition: var(--transition); 
+}
+
+.change-btn:hover { 
+    border-color: 
+    var(--accent); 
+    color: var(--accent); 
+}
+
+.progress-wrap { 
+    background: var(--border); 
+    border-radius: 99px; 
+    height: 6px; 
+    position: relative; 
+    overflow: hidden; 
+}
+
+.progress-bar { 
+    height: 100%; 
+    background: var(--accent); 
+    border-radius: 99px; 
+    transition: width .3s; 
+}
+
+.progress-wrap span { 
+    display: block; 
+    text-align: center; 
+    font-size: 11px; 
+    color: var(--text3); 
+    margin-top: 4px; 
+}
+
+.form-group select { 
+    width: 100%; 
+    padding: 11px 14px; 
+    border: 1.5px solid var(--border); 
+    border-radius: var(--radius-sm); 
+    font-size: 13px; 
+    background: var(--off-white); 
+    outline: none; 
+    color: var(--text); 
+    font-family: var(--font); 
+    transition: var(--transition); 
+}
+
+.form-group select:focus { 
+    border-color: var(--accent); 
+    background: #fff; 
+}
+
+.video-type-toggle { 
+    display: flex; 
+    gap: 10px;
+}
+.type-option { 
+    flex: 1; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    padding: 12px 16px; 
+    border: 1.5px solid var(--border); 
+    border-radius: var(--radius-sm); 
+    cursor: pointer; 
+    font-size: 13px; 
+    transition: var(--transition); 
+}
+
+.type-option input { display: none; }
+.type-option.selected { 
+    border-color: var(--accent); 
+    background: rgba(232,68,26,.06); 
+    color: var(--accent); 
+    font-weight: 600; 
+}
+
+.type-option.disabled { 
+    opacity: .4; 
+    cursor: not-allowed;
+}
+
+.create-actions { 
+    display: flex; 
+    gap: 10px; 
+    margin-top: 8px; 
+}
+
+.create-cancel-btn { 
+    flex: 1; 
+    padding: 12px; 
+    border: 1.5px solid var(--border); 
+    border-radius: var(--radius-sm); 
+    font-size: 13px; 
+    font-weight: 600; 
+    color: var(--text2); 
+    background: transparent; 
+    cursor: pointer; 
+    font-family: var(--font); 
+    transition: var(--transition); 
+}
+
+.create-cancel-btn:hover { background: var(--off-white); }
+.create-submit-btn { 
+    flex: 2; 
+    padding: 12px; 
+    background: var(--accent); 
+    color: #fff; 
+    border-radius: var(--radius-sm); 
+    font-size: 13px; 
+    font-weight: 700; 
+    cursor: pointer; 
+    border: none; 
+    font-family: var(--font); 
+    transition: var(--transition); 
+}
+
+.create-submit-btn:hover:not(:disabled) { 
+    background: var(--accent2); 
+    transform: translateY(-1px); 
+}
+
+.create-submit-btn:disabled { 
+    opacity: .6; 
+    cursor: not-allowed; 
+}
+
+@media (max-width: 768px) {
+    .create-page { padding: 18px 14px; }
+}

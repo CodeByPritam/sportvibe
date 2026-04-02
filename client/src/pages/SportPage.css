@@ -1,0 +1,26 @@
+.sport-banner { 
+    background: var(--surface); 
+    border-bottom: 1px solid var(--border); 
+    padding: 20px 28px; 
+    display: flex; 
+    align-items: center; 
+    gap: 16px; 
+}
+
+.sport-banner-emoji { font-size: 36px; }
+.sport-banner h2 { 
+    font-size: 20px; 
+    font-weight: 800; 
+}
+
+.sport-banner p { 
+    font-size: 12px; 
+    color: var(--text3);
+    margin-top: 2px; 
+}
+
+.sport-feed { 
+    padding: 24px; 
+    max-width: 900px; 
+    margin: 0 auto; 
+}
