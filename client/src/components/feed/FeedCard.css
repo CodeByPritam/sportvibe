@@ -127,3 +127,67 @@
 }
 .feed-action-btn.liked { color: var(--accent); }
 .feed-action-share { margin-left: auto; }
+
+.feed-video { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block; 
+    border-radius: var(--radius-sm); 
+}
+
+.feed-mute-btn { 
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+    width: 30px; 
+    height: 30px; 
+    border-radius: 50%; 
+    background: rgba(0,0,0,.55); 
+    border: none; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: #fff; 
+    cursor: pointer; 
+    transition: var(--transition); 
+    backdrop-filter: blur(4px); 
+    z-index: 2; 
+}
+
+.feed-mute-btn:hover{ background: rgba(0,0,0,.8); }
+.feed-pause-overlay { 
+    position: absolute; 
+    inset: 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background: rgba(0,0,0,.2); 
+    border-radius: var(--radius-sm); 
+    pointer-events: none; 
+}
+
+.feed-play-circle { 
+    width: 48px; 
+    height: 48px; 
+    border-radius: 50%; 
+    background: rgba(255,255,255,.85); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 18px; 
+    padding-left: 3px; 
+}
+
+.feed-thumb { 
+    margin: 14px 16px; 
+    border-radius: var(--radius-sm); 
+    overflow: hidden; 
+    background: var(--bg); 
+    aspect-ratio: 16/9; 
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    max-width: 100%; 
+}

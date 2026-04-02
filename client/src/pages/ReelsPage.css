@@ -240,6 +240,27 @@
     cursor: not-allowed; 
 }
 
+.reel-mute-btn { 
+    position: absolute; 
+    top: 70px; 
+    right: 14px; 
+    z-index: 10; 
+    width: 36px; 
+    height: 36px; 
+    border-radius: 50%; 
+    background: rgba(0,0,0,.5); 
+    border: none; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: #fff; 
+    cursor: pointer; 
+    transition: var(--transition); 
+    backdrop-filter: blur(4px); 
+}
+
+.reel-mute-btn:hover{ background: rgba(0,0,0,.8); }
+
 @media (max-width: 768px) {
     .reels-page   { padding: 8px; }
     .reel-viewport{ max-width: 100%; }

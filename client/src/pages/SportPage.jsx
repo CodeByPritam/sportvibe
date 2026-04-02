@@ -22,9 +22,10 @@ export default function SportPage() {
     const info = SPORT_INFO[sport] || { emoji:'🏆', label: sport };
 
     // Sport feed using React Query
-    const { data, isLoading } = useQuery({
+    const { data, isLoading, error } = useQuery({
         queryKey: ['sport', sport],
         queryFn: () => getSportFeed(sport),
+        enabled:  !!sport,
     })
 
     // Extract reels from API response
@@ -43,13 +44,23 @@ export default function SportPage() {
             </div>
 
             <div className="sport-feed">
-                {isLoading ? <p className="loading-text">Loading…</p>
-                : reels.length === 0
-                    ? <p className="loading-text">No reels yet for {info.label}</p>
-                    : <div className="feed-grid">
+                {isLoading && <p className="loading-text">Loading…</p>}
+
+                {error && (
+                    <p className="loading-text" style={{color:'var(--accent)'}}>
+                        Error: {error.message}
+                    </p>
+                )}
+
+                {!isLoading && !error && reels.length === 0 && (
+                    <p className="loading-text">No reels yet for {info.label}</p>
+                )}
+
+                {reels.length > 0 && (
+                    <div className="feed-grid">
                         {reels.map(reel => <FeedCard key={reel._id} reel={reel} />)}
                     </div>
-                }
+                )}
             </div>
 
         </div>

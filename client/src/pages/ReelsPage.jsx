@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useScrollReels } from '../hooks/useReels';
 import { likeReel } from '../api/reels.api';
-import { Heart, MessageCircle, Share2, ChevronUp, ChevronDown, Play } from 'lucide-react';
+import { Heart, MessageCircle, Share2, ChevronUp, ChevronDown, Play, Volume2, VolumeX } from 'lucide-react'
 import toast from 'react-hot-toast';
 import './ReelsPage.css';
 
@@ -23,21 +23,38 @@ function ReelItem({ reel, isActive }) {
     const [liked, setLiked] = useState(reel.isLiked);
     const [count, setCount] = useState(reel.likesCount);
     const [playing, setPlaying] = useState(false);
+    const [muted, setMuted]     = useState(false)
     const videoRef  = useRef(null);
     const emoji = SPORT_EMOJI[reel.sport] || '🎥';
 
    // Auto-play
     useEffect(() => {
-        if (!videoRef.current) return;
+        const video = videoRef.current;
+        if (!video) return;
+
         if (isActive) {
-            videoRef.current.play().catch(() => {});
-            setPlaying(true);
+            const playVideo = () => {
+                video.muted = false;
+                video.play().then(() => setPlaying(true)).catch(err => {
+                    console.log('Unmuted autoplay blocked, retrying muted');
+                    video.muted = true;
+                    setMuted(true);
+                video.play().then(() => setPlaying(true)).catch(() => setPlaying(false))
+            });
+        }
+
+          if (video.readyState >= 3) {
+            playVideo()
+          } else {
+            video.addEventListener('canplay', playVideo, { once: true })
+            return () => video.removeEventListener('canplay', playVideo)
+          }
         } else {
-            videoRef.current.pause();
-            videoRef.current.currentTime = 0;
+            video.pause();
+            video.currentTime = 0;
             setPlaying(false);
         }
-    }, [isActive]);
+        }, [isActive])
 
     // Toggle play/pause on click
     const togglePlay = () => {
@@ -48,6 +65,15 @@ function ReelItem({ reel, isActive }) {
         } else {
             videoRef.current.play();
             setPlaying(true);
+        }
+    }
+
+    // Toggle mute/unmute
+    const toggleMute = e => {
+        e.stopPropagation();
+        if (videoRef.current) {
+            videoRef.current.muted = !muted;
+            setMuted(p => !p);
         }
     }
 
@@ -84,6 +110,10 @@ function ReelItem({ reel, isActive }) {
                     </div>
                 )}
             </div>
+
+            <button className="reel-mute-btn" onClick={toggleMute}>
+                {muted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+            </button>
 
             <div className="reel-header">
                 <div className="reel-user-avatar"> {reel.user?.name?.[0] || 'U'} </div>
