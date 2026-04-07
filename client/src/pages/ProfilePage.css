@@ -25,7 +25,7 @@
 .prof-header-content { 
     padding: 0 28px 24px; 
     position: relative;
-    z-index: 999; 
+    z-index: 9; 
 }
 
 .prof-avatar-wrap { 
