@@ -300,7 +300,6 @@ export default function ReelsPage() {
 
                 <div className="reel-nav">
                     <button className="reel-nav-btn" onClick={goPrev} disabled={currentIndex === 0} > <ChevronUp size={20} /> </button>
-                    <span className="reel-counter"> {currentIndex + 1} / {reels.length} </span>
                     <button className="reel-nav-btn" onClick={goNext} disabled={currentIndex === reels.length - 1} > <ChevronDown size={20} /> </button>
                 </div>
 
