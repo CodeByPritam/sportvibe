@@ -93,7 +93,7 @@ export default function ProfilePage() {
 
     // Handle reel click
     const handleReelClick = (reel) => {
-        navigate('/reels');
+        navigate(`/reels/${reel._id}`);
     }
 
     const initials = profile?.name

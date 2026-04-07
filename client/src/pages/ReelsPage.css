@@ -260,6 +260,35 @@
 }
 
 .reel-mute-btn:hover{ background: rgba(0,0,0,.8); }
+.reels-upload-btn { 
+    margin-top: 12px; 
+    padding: 10px 24px; 
+    background: var(--accent); 
+    color: #fff; 
+    border: none; 
+    border-radius: 99px; 
+    font-size: 13px; 
+    font-weight: 700; 
+    cursor: pointer; 
+    font-family: var(--font); 
+}
+
+.reel-counter { 
+    font-size: 12px; 
+    color: rgba(255,255,255,.7); 
+    font-weight: 600; 
+    min-width: 48px; 
+    text-align: center; 
+}
+
+.reel-loading-more { 
+    height: 100px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: rgba(255,255,255,.5); 
+    font-size: 13px; 
+}
 
 @media (max-width: 768px) {
     .reels-page   { padding: 8px; }

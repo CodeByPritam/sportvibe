@@ -27,6 +27,7 @@ export default function App() {
           <Route index element={<Navigate to="/home" replace />} />
           <Route path="home" element={<HomePage />} />
           <Route path="reels" element={<ReelsPage />} />
+          <Route path="reels/:id" element={<ReelsPage />} />
           <Route path="create" element={<CreatePage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="notifications" element={<NotificationsPage />} />
