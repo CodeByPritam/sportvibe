@@ -1,7 +1,9 @@
+import { useCallback } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Home, PlayCircle, PlusSquare, Bell, Settings, LogOut, User } from 'lucide-react';
 import useAuthStore from '../../store/authStore';
 import { logout } from '../../api/auth.api';
+import { X } from 'lucide-react';
 import './Sidebar.css';
 
 // Sports categories
@@ -28,12 +30,21 @@ export default function Sidebar() {
         navigate('/auth');
     }
 
+    // Handle Sidebar
+    const handleCloseSidebar = useCallback(() => {
+        let sidebar = document.querySelector('.sidebar');
+        sidebar.style.left = '-260px';
+    }, []);
+
     // Render
     return (
         <aside className="sidebar">
             <div className="sidebar-logo">
                 <div className="logo-mark">SV</div>
                 <span className="logo-text">Sport<span>Vibe</span></span>
+                <div className="close-menu" style={{ display: "block" }} onClick={handleCloseSidebar}>
+                    <X size={24} color="black" strokeWidth={2} />
+                </div> 
             </div>
 
             <nav className="sidebar-nav">

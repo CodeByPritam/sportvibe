@@ -178,16 +178,3 @@
     font-size: 18px; 
     padding-left: 3px; 
 }
-
-.feed-thumb { 
-    margin: 14px 16px; 
-    border-radius: var(--radius-sm); 
-    overflow: hidden; 
-    background: var(--bg); 
-    aspect-ratio: 16/9; 
-    position: relative; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    max-width: 100%; 
-}

@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { Search, Menu } from 'lucide-react';
 import useAuthStore from '../../store/authStore';
 import './Topbar.css';
 
@@ -17,9 +17,18 @@ export default function Topbar() {
         if (val.trim().length > 1) { navigate(`/search?q=${encodeURIComponent(val.trim())}`); }
     }, [navigate]);
 
+    // Handle Sidebar
+    const handleOpenSidebar = useCallback(() => {
+        let sidebar = document.querySelector('.sidebar');
+        sidebar.style.left = '0px';   
+    }, []);
+
     // Render topbar
     return (
         <header className="topbar">
+            <div className="open-menu" style={{ display: "none" }} onClick={handleOpenSidebar}>
+                <Menu size={24} color="black" strokeWidth={2} />
+            </div> 
             <div className="search-wrap">
                 <Search size={13} className="search-icon" />
                 <input className="search-input" placeholder="Search athletes, sports, reels…" value={q} onChange={handleChange} />
