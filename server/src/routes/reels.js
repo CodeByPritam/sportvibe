@@ -10,7 +10,7 @@ const router = express.Router();
 // Helper to add like/comment counts and isLiked flag
 const withLikeInfo = (reel, userId) => {
     const obj = reel.toObject ? reel.toObject() : { ...reel };
-    obj.likesCount = (obj.likes    || []).length;
+    obj.likesCount = (obj.likes || []).length;
     obj.commentsCount = (obj.comments || []).length;
     obj.isLiked = userId ? (obj.likes || []).some(id => id.toString() === userId.toString()) : false;
     return obj;
@@ -37,8 +37,16 @@ router.get('/feed', optionalAuth, async (req, res, next) => {
 // Scroll feed sorted by views
 router.get('/scroll', optionalAuth, async (req, res, next) => {
     try {
-        const page = parseInt(req.query.page) || 1, limit = parseInt(req.query.limit) || 5;
-        const reels = await Reel.find({ isPublished: true }).sort({ views: -1, createdAt: -1 }).skip((page-1)*limit).limit(limit).populate('user','name username avatar location bio');
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 5;
+        const skip  = (page - 1) * limit;
+
+        // Removed videoType filter
+        const reels = await Reel.find({ isPublished: true })
+            .sort({ createdAt: -1, views: -1 })
+            .skip(skip)
+            .limit(limit)
+            .populate('user', 'name username avatar location bio');
 
         // Response
         res.json({ 
