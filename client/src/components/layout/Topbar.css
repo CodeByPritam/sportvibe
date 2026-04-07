@@ -63,7 +63,8 @@
 }
 
 @media (max-width: 770px) {
-    .open-menu {
+    .open-menu, 
+    .close-menu {
         display: block !important;
     }
 }

@@ -42,7 +42,7 @@ export default function Sidebar() {
             <div className="sidebar-logo">
                 <div className="logo-mark">SV</div>
                 <span className="logo-text">Sport<span>Vibe</span></span>
-                <div className="close-menu" style={{ display: "block" }} onClick={handleCloseSidebar}>
+                <div className="close-menu" style={{ display: "none" }} onClick={handleCloseSidebar}>
                     <X size={24} color="black" strokeWidth={2} />
                 </div> 
             </div>
